@@ -64,7 +64,10 @@ class GameScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
+            let fadeAway = SKAction.fadeOut(withDuration: 2.0)
+            let removeNode = SKAction.removeFromParent()
+            let sequence = SKAction.sequence([fadeAway, removeNode])
+            label.run(sequence)
         }
         
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
